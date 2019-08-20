@@ -34,5 +34,12 @@ namespace Sweepstakes
             contestant.emailAddress = GetUserInput();
             contestant.registrationNumber = GetUserInputInt();
         }
+
+        public static int GenerateRandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            int number = random.Next(min, max);
+            return number;
+        }
     }
 }
