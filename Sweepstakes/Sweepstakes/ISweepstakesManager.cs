@@ -4,18 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sweepstakes
+namespace Sweep_Stakes
 {
-    interface ISweepstakesManager
+    public interface ISweepstakesManager
     {
-        public void InsertSweepstakes(Sweepstakes sweepstakes)
-        {
+        //void InsertSweepstakes(Sweepstakes sweepstakes);
 
-        }
-
-        public Sweepstakes GetSweepstakes()
-        {
-
-        }
+        //Sweepstakes GetSweepstakes();
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sweepstakes
+namespace Sweep_Stakes
 {
     class SweepstakesStackManager : ISweepstakesManager
     {

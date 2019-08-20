@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sweepstakes
+namespace Sweep_Stakes
 {
     public class Contestant
     {
@@ -12,5 +12,9 @@ namespace Sweepstakes
         public string lastName;
         public string emailAddress;
         public int registrationNumber;
+
+        public Contestant()
+        {
+        }
     }
 }
