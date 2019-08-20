@@ -8,6 +8,15 @@ namespace Sweep_Stakes
 {
     class SweepstakesStackManager : ISweepstakesManager
     {
-        //needs to use the Stack data structure as an underlying structure
+        Stack<Sweepstakes> sweepstakesStack = new Stack<Sweepstakes>();
+        public void InsertSweepstakes(Sweepstakes sweepstakes)
+        {
+            sweepstakesStack.Push(sweepstakes);
+        }
+
+        public Sweepstakes GetSweepstakes()
+        {
+            return sweepstakesStack.Pop();
+        }
     }
 }

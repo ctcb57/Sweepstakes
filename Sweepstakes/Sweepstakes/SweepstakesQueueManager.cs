@@ -8,6 +8,15 @@ namespace Sweep_Stakes
 {
     class SweepstakesQueueManager : ISweepstakesManager
     {
-        //needs to use the queue data structure as underlying data structure
+        Queue<Sweepstakes> sweepstakesQueue = new Queue<Sweepstakes>();
+        public void InsertSweepstakes(Sweepstakes sweepstakes)
+        {
+            sweepstakesQueue.Enqueue(sweepstakes);
+        }
+
+        public Sweepstakes GetSweepstakes()
+        {
+            return sweepstakesQueue.Dequeue();
+        }
     }
 }
