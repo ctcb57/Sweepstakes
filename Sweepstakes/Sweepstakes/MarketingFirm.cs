@@ -9,5 +9,6 @@ namespace Sweepstakes
     class MarketingFirm
     {
         //insert dependency injection to utilize one of the sweepstakes managers
+        //functions as the game class for this project
     }
 }
