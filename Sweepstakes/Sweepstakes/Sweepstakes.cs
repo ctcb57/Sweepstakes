@@ -12,8 +12,8 @@ namespace Sweep_Stakes
         public Dictionary<int, Contestant> contestants;
         public Sweepstakes(string name)
         {
-            sweepstakesName = name;
-            contestants = new Dictionary<int, Contestant>();
+            this.sweepstakesName = name;
+            this.contestants = new Dictionary<int, Contestant>();
         }
 
         public void RegisterContestant(Contestant contestant)

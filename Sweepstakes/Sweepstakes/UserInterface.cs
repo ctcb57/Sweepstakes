@@ -46,24 +46,16 @@ namespace Sweep_Stakes
             return number;
         }
 
-        public static void IdentifyWinner(string winner, Sweepstakes sweepstakes)
+        public static void NotifyWinner()
         {
-            Console.WriteLine($"The winner of the sweepstakes is: {winner}");
+            Console.WriteLine("You win");
+            Console.ReadLine();
         }
 
-        public static void ChooseSweepstakesManager()
+        public static void NotifyLosers()
         {
-            Console.WriteLine("Choose which Sweepstakes Manager you would like to use.");
-        }
-
-        public static void NotifyWinner(string message)
-        {
-            Console.WriteLine(message);
-        }
-
-        public static void NotifyLosers(string message)
-        {
-            Console.WriteLine(message);
+            Console.WriteLine("You lose");
+            Console.ReadLine();
         }
     }
 }

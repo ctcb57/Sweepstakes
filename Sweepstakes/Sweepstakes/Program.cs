@@ -10,14 +10,11 @@ namespace Sweep_Stakes
     {
         static void Main(string[] args)
         {
-            Sweepstakes test = new Sweepstakes("test");
-            Contestant newContestant = new Contestant();
+            SweepstakesManagerFactory testFactory = new SweepstakesManagerFactory();
+            MarketingFirm test = new MarketingFirm(testFactory.ChooseSweepstakesManager());
 
-            test.RegisterContestant(newContestant);
-            test.RegisterContestant(newContestant);
-
-            test.PickWinner();
-            test.PrintContestantInfo(newContestant);
+            test.CreateSweepstakes("How many sweepstakes", "How many entries", "test");
+            test.RunSweepstakes();
         }
     }
 }

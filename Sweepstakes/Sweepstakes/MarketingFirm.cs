@@ -21,57 +21,55 @@ namespace Sweep_Stakes
         }
 
 
-        public void CreateSweepstakes(string sweepstakesMessage, string entriesMessage, Sweepstakes sweepstakes, Contestant contestant)
+        public void CreateSweepstakes(string sweepstakesMessage, string entriesMessage, string name)
         {
             int numberOfSweepstakes = UserInterface.GetIntUserInput(sweepstakesMessage);
             for (int i = 0; i < numberOfSweepstakes; i++)
             {
+                Sweepstakes sweepstakes = new Sweepstakes(name);
                 int numberOfEntries = UserInterface.GetIntUserInput(entriesMessage);
                 for (int j = 0; j < numberOfEntries; j++)
                 {
+                    Contestant contestant = new Contestant();
                     sweepstakes.RegisterContestant(contestant);
                 }
                 sweepstakesManager.InsertSweepstakes(sweepstakes);
             }
         }
 
-        public void RunSweepstakes(string winnerMessage, string loserMessage)
+        public void RunSweepstakes()
         {
             for(int i = 0; i < sweepstakesManager.Count; i++)
             {
-                Sweepstakes sweepstakes1 = sweepstakesManager.GetSweepstakes();
-                Contestant winner = sweepstakes1.GetWinner();
-                NotifyContestants(sweepstakes1, winner, winnerMessage, loserMessage);
-                string sweepstakesWinner = sweepstakes1.PickWinner(winner);
-                sweepstakes1.PrintContestantInfo(sweepstakesWinner);
+                Sweepstakes sweepstake = sweepstakesManager.GetSweepstakes();
+                NotifyContestants(sweepstake);
             }
         }
 
-        public void NotifyContestants(Sweepstakes sweepstakes, Contestant winner, string winnerMessage, string loserMessage)
+        public void NotifyContestants(Sweepstakes sweepstakes)
         {
-            int entryNumber = winner.registrationNumber;
-            sweepstakes.contestants.TryGetValue(entryNumber, out Contestant value);
-            for(int i = 0; i < sweepstakes.contestants.Count; i++)
+            Contestant winner = sweepstakes.GetWinner();
+            for (int i = 1; i <= sweepstakes.contestants.Count; i++)
             {
-                if(sweepstakes.contestants[i].registrationNumber == value.registrationNumber)
+                if(sweepstakes.contestants[i].registrationNumber == winner.registrationNumber)
                 {
-                    SendEmailToWinner(winnerMessage);
+                    SendEmailToWinner();
                 }
                 else
                 {
-                    SendEmailToLosers(loserMessage);
+                    SendEmailToLosers();
                 }
             }
         }
 
-        public void SendEmailToWinner(string message)
+        public void SendEmailToWinner()
         {
-            UserInterface.NotifyWinner(message);
+            UserInterface.NotifyWinner();
         }
 
-        public void SendEmailToLosers(string message)
+        public void SendEmailToLosers()
         {
-            UserInterface.NotifyLosers(message);
+            UserInterface.NotifyLosers();
         }
 
     }
