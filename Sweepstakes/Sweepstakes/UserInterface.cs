@@ -11,17 +11,22 @@ namespace Sweep_Stakes
         public static string GetUserInput(string message)
         {
             Console.WriteLine(message);
-            string input = Console.ReadLine().Trim();
+            string input = 
+            Console.ReadLine().Trim();
             return input;
         }
 
-        //public static int AssignRegistrationNumber()
-        //{
-        //    int number = GenerateRandomNumber(1, 101);
-        //    string regNumber = number.ToString();
-        //    Console.WriteLine($"Your registrstation number is: {regNumber}");
-        //    return number;
-        //}
+        public static int GetIntUserInput(string message)
+        {
+            Console.WriteLine(message);
+            int input;
+            while (!int.TryParse(Console.ReadLine(), out input) || input <= 0)
+            {
+                Console.WriteLine("Invalid response. Please enter a number.");
+            }
+            return input;
+        }
+
 
         public static void AssignContestantInformation(Contestant contestant, Sweepstakes sweepstakes)
         {
@@ -29,7 +34,7 @@ namespace Sweep_Stakes
             contestant.lastName = GetUserInput("Please enter your last name:");
             contestant.emailAddress = GetUserInput("Please enter your email address:");
             contestant.registrationNumber = sweepstakes.contestants.Count + 1;
-            Console.WriteLine($"Your registration number is{contestant.registrationNumber.ToString()}.");
+            Console.WriteLine($"Your registration number is {contestant.registrationNumber.ToString()}.");
             Console.WriteLine("Thanks for entering.  Press enter to exit");
             Console.ReadLine();
         }
@@ -44,6 +49,11 @@ namespace Sweep_Stakes
         public static void IdentifyWinner(string winner, Sweepstakes sweepstakes)
         {
             Console.WriteLine($"The winner of the sweepstakes is: {winner}");
+        }
+
+        public static void ChooseSweepstakesManager()
+        {
+            Console.WriteLine("Choose which Sweepstakes Manager you would like to use.");
         }
     }
 }

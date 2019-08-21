@@ -8,7 +8,13 @@ namespace Sweep_Stakes
 {
     class MarketingFirm
     {
-        //insert dependency injection to utilize one of the sweepstakes managers
-        //functions as the game class for this project
+        public ISweepstakesManager sweepstakesManager;
+
+        //need to make factory class
+        //
+        public MarketingFirm(ISweepstakesManager sweepstakesManager)
+        {
+            this.sweepstakesManager = sweepstakesManager;
+        }
     }
 }
