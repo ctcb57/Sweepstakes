@@ -10,11 +10,40 @@ namespace Sweep_Stakes
     {
         public ISweepstakesManager sweepstakesManager;
 
-        //need to make factory class
-        //
         public MarketingFirm(ISweepstakesManager sweepstakesManager)
         {
             this.sweepstakesManager = sweepstakesManager;
         }
+
+        public void CreateContestant(Sweepstakes sweepstakes, Contestant contestant)
+        {
+            sweepstakes.RegisterContestant(contestant);
+        }
+
+
+
+        //public void CreateSweepstakes(string message, Sweepstakes sweepstakes, Contestant contestant)
+        //{
+        //    int numberOfEntries = UserInterface.GetIntUserInput(message);
+        //    for(int i = 0; i < numberOfEntries; i++)
+        //    {
+        //        sweepstakes.RegisterContestant(contestant);
+        //    }
+        //    sweepstakesManager.InsertSweepstakes(sweepstakes);
+        //}
+
+        public void RunSweepstakes()
+        {
+            for(int i = 0; i < sweepstakesManager.Count; i++)
+            {
+                Sweepstakes sweepstakes1 = sweepstakesManager.GetSweepstakes();
+                sweepstakes1.PickWinner();
+            }
+        }
+
+            //Notify contestants
+
+            //
+
     }
 }

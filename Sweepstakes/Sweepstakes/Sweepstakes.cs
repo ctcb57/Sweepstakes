@@ -30,7 +30,7 @@ namespace Sweep_Stakes
             return value.firstName + " " + value.lastName;
         }
 
-        public void PrintContestantInfo(Contestant contestant)
+        public void PrintContestantInfo()
         {
             Console.WriteLine(PickWinner());
             Console.ReadLine();

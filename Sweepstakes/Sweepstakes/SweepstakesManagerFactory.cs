@@ -8,20 +8,23 @@ namespace Sweep_Stakes
 {
     class SweepstakesManagerFactory
     {
-        public void ChooseSweepstakesManager()
+        public ISweepstakesManager ChooseSweepstakesManager(string message)
         {
-            string input = UserInterface.GetUserInput("Choose which manager method you would like to use (stack or queue):");
-            switch (input)
+            ISweepstakesManager manager = null;
+            switch (message)
             {
                 case "stack":
-                    MarketingFirm newStackMethod = new MarketingFirm(new SweepstakesStackManager());
+                    manager = new SweepstakesStackManager();
                     break;
+
                 case "queue":
-                    MarketingFirm newQueueMethod = new MarketingFirm(new SweepstakesQueueManager());
+                    manager = new SweepstakesQueueManager();
                     break;
+
                 default:
                     break;
             }
+            return manager;
         }
     }
 }
