@@ -35,19 +35,44 @@ namespace Sweep_Stakes
             }
         }
 
-        public void RunSweepstakes()
+        public void RunSweepstakes(string winnerMessage, string loserMessage)
         {
             for(int i = 0; i < sweepstakesManager.Count; i++)
             {
                 Sweepstakes sweepstakes1 = sweepstakesManager.GetSweepstakes();
-                string winner = sweepstakes1.PickWinner();
-                sweepstakes1.PrintContestantInfo(winner);
+                Contestant winner = sweepstakes1.GetWinner();
+                NotifyContestants(sweepstakes1, winner, winnerMessage, loserMessage);
+                string sweepstakesWinner = sweepstakes1.PickWinner(winner);
+                sweepstakes1.PrintContestantInfo(sweepstakesWinner);
             }
         }
 
-            //Notify contestants
+        public void NotifyContestants(Sweepstakes sweepstakes, Contestant winner, string winnerMessage, string loserMessage)
+        {
+            int entryNumber = winner.registrationNumber;
+            sweepstakes.contestants.TryGetValue(entryNumber, out Contestant value);
+            for(int i = 0; i < sweepstakes.contestants.Count; i++)
+            {
+                if(sweepstakes.contestants[i].registrationNumber == value.registrationNumber)
+                {
+                    SendEmailToWinner(winnerMessage);
+                }
+                else
+                {
+                    SendEmailToLosers(loserMessage);
+                }
+            }
+        }
 
-            //
+        public void SendEmailToWinner(string message)
+        {
+            UserInterface.NotifyWinner(message);
+        }
+
+        public void SendEmailToLosers(string message)
+        {
+            UserInterface.NotifyLosers(message);
+        }
 
     }
 }

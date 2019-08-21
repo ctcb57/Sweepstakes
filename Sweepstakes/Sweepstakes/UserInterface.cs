@@ -55,5 +55,15 @@ namespace Sweep_Stakes
         {
             Console.WriteLine("Choose which Sweepstakes Manager you would like to use.");
         }
+
+        public static void NotifyWinner(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public static void NotifyLosers(string message)
+        {
+            Console.WriteLine(message);
+        }
     }
 }

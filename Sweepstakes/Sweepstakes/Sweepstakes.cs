@@ -21,13 +21,18 @@ namespace Sweep_Stakes
             UserInterface.AssignContestantInformation(contestant, this);
             contestants.Add(contestant.registrationNumber, contestant);
         }
-
-        public string PickWinner()
+        //Mike Heinisch stated it was ok to have a method which returns the winner as the object and a different one which makes that a string
+        public Contestant GetWinner()
         {
             int count = contestants.Count;
             int winnerNumber = UserInterface.GenerateRandomNumber(1, count + 1);
             contestants.TryGetValue(winnerNumber, out Contestant value);
-            return value.firstName + " " + value.lastName;
+            return value;
+        }
+
+        public string PickWinner(Contestant contestant)
+        {
+            return contestant.firstName + " " + contestant.lastName;
         }
 
         public void PrintContestantInfo(string winner)
