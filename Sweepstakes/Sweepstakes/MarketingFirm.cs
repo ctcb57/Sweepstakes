@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using MailKit;
+using MimeKit;
 
 namespace Sweep_Stakes
 {
@@ -53,24 +56,71 @@ namespace Sweep_Stakes
             {
                 if(sweepstakes.contestants[i].registrationNumber == winner.registrationNumber)
                 {
-                    SendEmailToWinner();
+                    SendEmailToWinner(winner.emailAddress);
                 }
                 else
                 {
-                    SendEmailToLosers();
+                    SendEmailToLosers(sweepstakes.contestants[i].emailAddress);
                 }
             }
         }
 
-        public void SendEmailToWinner()
+        public void SendEmailToWinner(string emailAddress)
         {
-            UserInterface.NotifyWinner();
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Name", "devcodecampsweepstakes@gmail.com"));
+            message.To.Add(new MailboxAddress("WinnerName", emailAddress));
+            message.Subject = "You're a winner!";
+
+            message.Body = new TextPart("plain")
+            {
+                Text = @"Hey Winner,
+
+You entered a sweepstakes recently and won!
+
+-- Charlie"
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.ServerCertificateValidationCallback = (s,c,h,e) => true;
+
+                client.Connect("smtp.gmail.com", 587, false);
+
+                client.Authenticate("devcodecampsweepstakes", "Cc283192");
+
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
 
-        public void SendEmailToLosers()
+        public void SendEmailToLosers(string emailAddress)
         {
-            UserInterface.NotifyLosers();
-        }
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Name", "devcodecampsweepstakes@gmail.com"));
+            message.To.Add(new MailboxAddress("WinnerName", emailAddress));
+            message.Subject = "You're a loser!";
 
+            message.Body = new TextPart("plain")
+            {
+                Text = @"Hey Loser,
+
+You entered a sweepstakes recently and lost!  Better luck next time!
+
+-- Charlie"
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+
+                client.Connect("smtp.gmail.com", 587, false);
+
+                client.Authenticate("devcodecampsweepstakes", "Cc283192");
+
+                client.Send(message);
+                client.Disconnect(true);
+            }
+        }
     }
 }
