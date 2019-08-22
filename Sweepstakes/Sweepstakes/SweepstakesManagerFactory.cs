@@ -23,7 +23,7 @@ namespace Sweep_Stakes
                     break;
 
                 default:
-                    break;
+                    return ChooseSweepstakesManager(message);
             }
             return manager;
         }
