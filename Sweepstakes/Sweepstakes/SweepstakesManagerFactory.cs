@@ -8,11 +8,11 @@ namespace Sweep_Stakes
 {
     class SweepstakesManagerFactory
     {
-        public ISweepstakesManager ChooseSweepstakesManager()
+        public ISweepstakesManager ChooseSweepstakesManager(string message)
         {
-            string message = UserInterface.GetUserInput("stack or queue");
+            string response = UserInterface.GetUserInput(message);
             ISweepstakesManager manager = null;
-            switch (message)
+            switch (response)
             {
                 case "stack":
                     manager = new SweepstakesStackManager();

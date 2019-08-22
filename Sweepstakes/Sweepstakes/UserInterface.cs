@@ -34,8 +34,8 @@ namespace Sweep_Stakes
             contestant.lastName = GetUserInput("Please enter your last name:");
             contestant.emailAddress = GetUserInput("Please enter your email address:");
             contestant.registrationNumber = sweepstakes.contestants.Count + 1;
-            Console.WriteLine($"Your registration number is {contestant.registrationNumber.ToString()}.");
-            Console.WriteLine("Thanks for entering.  Press enter to exit");
+            Console.WriteLine($"The entry registration number is {contestant.registrationNumber.ToString()}.");
+            Console.WriteLine("Registration complete.  Press enter to continue.");
             Console.ReadLine();
         }
 
@@ -46,16 +46,5 @@ namespace Sweep_Stakes
             return number;
         }
 
-        public static void NotifyWinner()
-        {
-            Console.WriteLine("You win");
-            Console.ReadLine();
-        }
-
-        public static void NotifyLosers()
-        {
-            Console.WriteLine("You lose");
-            Console.ReadLine();
-        }
     }
 }
