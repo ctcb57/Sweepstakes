@@ -46,6 +46,7 @@ namespace Sweep_Stakes
             {
                 Sweepstakes sweepstake = sweepstakesManager.GetSweepstakes();
                 NotifyContestants(sweepstake);
+                i--;
             }
         }
 
@@ -56,27 +57,29 @@ namespace Sweep_Stakes
             {
                 if(sweepstakes.contestants[i].registrationNumber == winner.registrationNumber)
                 {
-                    SendEmailToWinner(winner.emailAddress);
+                    SendEmailToWinner(winner.firstName + " " + winner.lastName, winner.emailAddress);
                 }
                 else
                 {
-                    SendEmailToLosers(sweepstakes.contestants[i].emailAddress);
+                    SendEmailToLosers(sweepstakes.contestants[i].firstName + " " + sweepstakes.contestants[i].lastName, sweepstakes.contestants[i].emailAddress);
                 }
             }
         }
 
-        public void SendEmailToWinner(string emailAddress)
+        public void SendEmailToWinner(string name, string emailAddress)
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Name", "devcodecampsweepstakes@gmail.com"));
-            message.To.Add(new MailboxAddress("WinnerName", emailAddress));
+            message.From.Add(new MailboxAddress("name", "devcodecampsweepstakes@gmail.com"));
+            message.To.Add(new MailboxAddress(name, emailAddress));
             message.Subject = "You're a winner!";
 
             message.Body = new TextPart("plain")
             {
-                Text = @"Hey Winner,
+                Text = $@"Hey {name},
 
-You entered a sweepstakes recently and won!
+You entered a sweepstakes recently and won! Congratulations!
+
+
 
 -- Charlie"
             };
@@ -94,18 +97,20 @@ You entered a sweepstakes recently and won!
             }
         }
 
-        public void SendEmailToLosers(string emailAddress)
+        public void SendEmailToLosers(string name, string emailAddress)
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Name", "devcodecampsweepstakes@gmail.com"));
-            message.To.Add(new MailboxAddress("WinnerName", emailAddress));
-            message.Subject = "You're a loser!";
+            message.To.Add(new MailboxAddress(name, emailAddress));
+            message.Subject = "Sweepstakes update";
 
             message.Body = new TextPart("plain")
             {
-                Text = @"Hey Loser,
+                Text = $@"Hey {name},
 
 You entered a sweepstakes recently and lost!  Better luck next time!
+
+
 
 -- Charlie"
             };
